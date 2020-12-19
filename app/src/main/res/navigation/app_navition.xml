@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/app_navition"
+    app:labelVisibilityMode="labeled"
+    tools:ignore="UnusedNavigation">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.myshop.ui.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/topicFragment"
+        android:name="com.example.myshop.ui.topic.TopicFragment"
+        android:label="TopicFragment" />
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.example.myshop.ui.shop.ShopFragment"
+        android:label="ShopFragment" />
+    <fragment
+        android:id="@+id/sortFragment"
+        android:name="com.example.myshop.ui.sort.SortFragment"
+        android:label="SortFragment" />
+    <fragment
+        android:id="@+id/meFragment"
+        android:name="com.example.myshop.ui.me.MeFragment"
+        android:label="MeFragment" />
+</navigation>

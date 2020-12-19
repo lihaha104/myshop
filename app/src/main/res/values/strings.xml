@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyApp</string>
+    <string name="bar_name_home">首页</string>
+    <string name="bar_name_topic">专题</string>
+    <string name="bar_name_sort">分类</string>
+    <string name="bar_name_shop">购物车</string>
+    <string name="bar_name_me">我的</string>
+</resources>

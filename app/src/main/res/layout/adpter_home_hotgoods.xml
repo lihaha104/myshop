@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/img_hotgood"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_100"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:id="@+id/txt_hotgood_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/img_hotgood"
+        app:layout_constraintLeft_toRightOf="@id/img_hotgood"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:textSize="@dimen/sp_16"/>
+    <TextView
+        android:id="@+id/txt_hotgood_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/img_hotgood"
+        app:layout_constraintLeft_toRightOf="@id/img_hotgood"
+        app:layout_constraintBottom_toBottomOf="@id/img_hotgood"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:textSize="@dimen/sp_12"/>
+    <TextView
+        android:id="@+id/txt_hotgood_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/img_hotgood"
+        app:layout_constraintBottom_toBottomOf="@id/img_hotgood"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:textColor="@color/red"
+        android:textSize="@dimen/sp_16"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
