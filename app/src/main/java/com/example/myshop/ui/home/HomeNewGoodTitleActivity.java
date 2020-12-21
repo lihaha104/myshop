@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,7 +15,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +61,8 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
     RecyclerView newgoodTitleImgRcy;
     @BindView(R.id.img_icno)
     ImageView imgIcno;
+    @BindView(R.id.con)
+    ConstraintLayout con;
     //是否是新品
     private int isNew = 1;
     private int page = 1;
@@ -84,18 +90,18 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
         order = ASC;
         sort = DEFAULT;
         categoryId = 0;
-        layoutPrice.setTag(0);  //
-        txtAll.setTextColor(Color.parseColor(NewGoodActivity.this.getString(R.color.red)));
+        initText(newgoodZonghe);
         data = new ArrayList<>();
-        newGoodsAdapter = new NewGoodsAdapter(data, this);
-        recyGoodList.setLayoutManager(new GridLayoutManager(this, 2));
-        recyGoodList.setAdapter(newGoodsAdapter);
+        newgoodTitleImgRcy.setLayoutManager(new GridLayoutManager(this, 2));
+        newGoodsAdapter = new HomeNewGoodsTitleAdpter(this, data);
+
+        newgoodTitleImgRcy.setAdapter(newGoodsAdapter);
+
     }
 
 
-
     private Map<String, String> initMap() {
-        map = new HashMap();
+        HashMap<String, String> map = new HashMap();
         map.put("isNew", String.valueOf(isNew));
         map.put("page", String.valueOf(page));
         map.put("size", String.valueOf(size));
@@ -105,19 +111,25 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
         return map;
     }
 
+    //执行p
     @Override
     protected void initData() {
         persenter.gethomenewgoodstitle(initMap());
     }
 
+    //获得数据包
     @Override
     public void gethomenewgoodstitleReturn(NewGoodsTitleBean result) {
 
         List<NewGoodsTitleBean.DataBeanX.DataBean> datas = result.getData().getData();
-        newgoodTitleImgRcy.setLayoutManager(new GridLayoutManager(this,2));
-        HomeNewGoodsTitleAdpter homeNewGoodsAdpter = new HomeNewGoodsTitleAdpter(this, datas);
-        newgoodTitleImgRcy.setAdapter(homeNewGoodsAdpter);
+        List<NewGoodsTitleBean.DataBeanX.FilterCategoryBean> filterdatas = result.getData().getFilterCategory();
+        data.clear();
+        data.addAll(datas);
+        Toast.makeText(this, "" + data.size(), Toast.LENGTH_SHORT).show();
+        newGoodsAdapter.notifyDataSetChanged();
     }
+
+    int type = 0;
 
     @OnClick({R.id.newgood_zonghe, R.id.newgood_pice, R.id.newgood_kind})
     public void onViewClicked(View view) {
@@ -130,45 +142,48 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
                 sort = DEFAULT;
                 order = ASC;
                 initData();
-                /*if (popupWindow!=null){
+                if (popupWindow != null) {
                     popupWindow.dismiss();
-                }*/
+                }
                 break;
             case R.id.newgood_pice:
                 initText(newgoodPice);
-                if (type==1){
-                    type=2;
+                if (type == 1) {
+                    type = 2;
                     setIconType(type);
-                    sort=PRICE;
-                    order=DESC;
-                    initData();
-                }else if (type==0){
-                    type=1;
+                    sort = PRICE;
+                    order = DESC;
+                } else if (type == 0) {
+                    type = 1;
                     setIconType(type);
-                    order=ASC;
-                    sort=PRICE;
-                    initData();
-                }else {
-                    type=1;
+                    order = ASC;
+                    sort = PRICE;
+                } else {
+                    type = 1;
                     setIconType(type);
-                    order=ASC;
-                    sort=PRICE;
-                    initData();
+                    order = ASC;
+                    sort = PRICE;
+
+                }
+                initData();
+                if (popupWindow != null) {
+                    popupWindow.dismiss();
                 }
 
-                /*if (popupWindow==null){
-                    popupWindow.dismiss();
-                }*/
                 break;
             case R.id.newgood_kind:
+
                 initText(newgoodKind);
-                type=0;
+                type = 0;
                 setIconType(type);
                 initData();
-                //setPopw();
+                if(popupWindow!=null){
+                    setPopw();
+                }
                 break;
         }
     }
+
     //设置价格的图标
     private void setIconType(int type) {
         switch (type) {
@@ -183,6 +198,7 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
                 break;
         }
     }
+
     //设置点击的文本变红
     @SuppressLint("ResourceType")
     private void initText(TextView tv) {
@@ -201,11 +217,46 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void setPopw() {
+        Resources res = getResources();
+        View inflate = View.inflate(this,R.layout.popw, null);
+        popupWindow = new PopupWindow(inflate,ViewGroup.LayoutParams.MATCH_PARENT,200);
+
+        LinearLayout li1 = inflate.findViewById(R.id.li1);
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+        for (int i = 0; i < filterCategory.size(); i++) {
+            View inflate1 = LayoutInflater.from(this).inflate(R.layout.popw_item, null);
+            TextView tv = inflate1.findViewById(R.id.item_tv);
+            tv.setText(filterCategory.get(i).getName());
+//            tv.setLayoutParams(layoutParams);
+            tv.setGravity(Gravity.CENTER);
+            int finalI = i;
+            tv.setTag(i);
+            Drawable drawable = res.getDrawable(R.drawable.stroke_black);
+            tv.setBackground(drawable);
+            li1.addView(inflate1);
+            inflate1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    NewGoodsTitleBean.DataBeanX.FilterCategoryBean filterCategoryBean = filterCategory.get(finalI);
+                    categoryId = filterCategoryBean.getId();
+                    HashMap<String, String> stringStringHashMap = new HashMap<>();
+                    stringStringHashMap.put("isNew", 1 + "");
+                    stringStringHashMap.put("categoryId", categoryId + "");
+                    persenter.gethomenewgoodstitle(stringStringHashMap);
+                    popupWindow.dismiss();
+                }
+            });
+            Toast.makeText(this, ""+i, Toast.LENGTH_SHORT).show();
+        }
+        popupWindow.showAsDropDown(con);
+    }
+
     @Override
     public void showTips(String tips) {
 
     }
-
 
 
 }

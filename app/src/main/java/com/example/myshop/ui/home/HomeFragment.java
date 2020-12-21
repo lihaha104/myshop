@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myshop.R;
+import com.example.myshop.base.BaseAdapter;
 import com.example.myshop.base.BaseFragment;
 import com.example.myshop.interfaces.home.IHome;
 import com.example.myshop.model.home.HomeModelBean;
@@ -82,7 +83,7 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
             initChannel(data.getChannel());//初始化channel
             initBrand(data.getBrandList());//初始化Brand
             initNewgoods(data.getNewGoodsList());//初始化NewGoodsList
-            initHotgoods(data.getHotGoodsList());//初始化NewGoodsList
+            initHotgoods(data.getHotGoodsList());//初始化hotGoodsList
             initTopicgoods(data.getTopicList());//初始化TopicGoodslist
             initCategoryList(data.getCategoryList());//初始化Categorylist
 
@@ -136,6 +137,14 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
         recyBrand.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         HomeBrandAdpter homeBrandAdpter = new HomeBrandAdpter(getActivity(), brandList);
         recyBrand.setAdapter(homeBrandAdpter);
+        homeBrandAdpter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                Intent intent = new Intent(getActivity(), HomeBrandTitleImgActivity.class);
+                intent.putExtra("id",brandList.get(pos).getId());
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     ///获得NewGoodsList数据
@@ -151,6 +160,12 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
         recyHotgood.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         HomeHotGoodsAdpter homeHotfoodsAdpter = new HomeHotGoodsAdpter(getActivity(), hotGoodsList);
         recyHotgood.setAdapter(homeHotfoodsAdpter);
+        homeHotfoodsAdpter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                startActivity(new Intent(getActivity(),HomeHotGoodsItemActivity.class));
+            }
+        });
     }
 
     //获得TopicGoodslist()数据

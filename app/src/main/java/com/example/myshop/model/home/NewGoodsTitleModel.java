@@ -9,19 +9,22 @@ import com.example.myshop.utils.RxUtils;
 
 import java.util.Map;
 
+import io.reactivex.disposables.Disposable;
+
 public class NewGoodsTitleModel extends BaseModel implements INewGoodsTitle.Model{
 
     @Override
     public void gethomenewgoodstitle(Callback callback, Map map) {
-        HttpManager.getInstance()
-                .getService()
-                .gethomenewgoodstitle(map)
-                .compose(RxUtils.rxScheduler())
-                .subscribe(new CommonSubscriber<NewGoodsTitleBean>(callback) {
-                    @Override
-                    public void onNext(NewGoodsTitleBean newGoodsTitleBean) {
-                        callback.success(newGoodsTitleBean);
-                    }
-                });
+       addDisposible(
+               (Disposable) HttpManager.getInstance().getService().gethomenewgoodstitle(map)
+               .compose(RxUtils.rxScheduler())
+               .subscribeWith(new CommonSubscriber<NewGoodsTitleBean>(callback) {
+                   @Override
+                   public void onNext(NewGoodsTitleBean newGoodsTitleBean) {
+                       callback.success(newGoodsTitleBean);
+                   }
+
+               })
+       );
     }
 }

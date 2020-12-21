@@ -124,7 +124,7 @@ public class NewGoodsTitleBean {
             private int id;
             private String name;
             private String list_pic_url;
-            private int retail_price;
+            private String retail_price;
 
             public int getId() {
                 return id;
@@ -150,11 +150,11 @@ public class NewGoodsTitleBean {
                 this.list_pic_url = list_pic_url;
             }
 
-            public int getRetail_price() {
+            public String getRetail_price() {
                 return retail_price;
             }
 
-            public void setRetail_price(int retail_price) {
+            public void setRetail_price(String retail_price) {
                 this.retail_price = retail_price;
             }
         }
@@ -206,7 +206,7 @@ public class NewGoodsTitleBean {
             private int id;
             private String name;
             private String list_pic_url;
-            private int retail_price;
+            private String retail_price;
 
             public int getId() {
                 return id;
@@ -232,11 +232,11 @@ public class NewGoodsTitleBean {
                 this.list_pic_url = list_pic_url;
             }
 
-            public int getRetail_price() {
+            public String getRetail_price() {
                 return retail_price;
             }
 
-            public void setRetail_price(int retail_price) {
+            public void setRetail_price(String retail_price) {
                 this.retail_price = retail_price;
             }
         }
