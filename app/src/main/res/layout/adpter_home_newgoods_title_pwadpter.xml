@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/dp_15"
+    android:layout_marginTop="@dimen/dp_10"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/pw_tv"
+        android:text="hahahaha"
+        android:gravity="center"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_30"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints">
+    </TextView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

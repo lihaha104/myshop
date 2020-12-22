@@ -2,8 +2,15 @@
 <LinearLayout
     android:background="@color/colorAccent"
     android:id="@+id/li1"
+    android:layout_marginTop="@dimen/dp_10"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content">
+   <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/pw_rcy"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       />
+
 
 </LinearLayout>

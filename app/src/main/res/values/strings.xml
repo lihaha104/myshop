@@ -5,4 +5,9 @@
     <string name="bar_name_sort">分类</string>
     <string name="bar_name_shop">购物车</string>
     <string name="bar_name_me">我的</string>
+
+    <string name="title_car_specs">请选择规格数量</string>
+    <string name="title_car_assess">评价($)</string>
+    <string name="title_car_lookall">查看全部</string>
+
 </resources>

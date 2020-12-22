@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myshop.R;
 import com.example.myshop.base.BaseActivity;
+import com.example.myshop.base.BaseAdapter;
 import com.example.myshop.interfaces.home.INewGoodsTitle;
 import com.example.myshop.model.home.NewGoodsTitleBean;
 import com.example.myshop.persenter.home.NewGoodsTitlePersenter;
@@ -94,7 +95,6 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
         data = new ArrayList<>();
         newgoodTitleImgRcy.setLayoutManager(new GridLayoutManager(this, 2));
         newGoodsAdapter = new HomeNewGoodsTitleAdpter(this, data);
-
         newgoodTitleImgRcy.setAdapter(newGoodsAdapter);
 
     }
@@ -122,7 +122,8 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
     public void gethomenewgoodstitleReturn(NewGoodsTitleBean result) {
 
         List<NewGoodsTitleBean.DataBeanX.DataBean> datas = result.getData().getData();
-        List<NewGoodsTitleBean.DataBeanX.FilterCategoryBean> filterdatas = result.getData().getFilterCategory();
+       filterCategory = result.getData().getFilterCategory();
+
         data.clear();
         data.addAll(datas);
         Toast.makeText(this, "" + data.size(), Toast.LENGTH_SHORT).show();
@@ -177,9 +178,7 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
                 type = 0;
                 setIconType(type);
                 initData();
-                if(popupWindow!=null){
-                    setPopw();
-                }
+                setPopw();
                 break;
         }
     }
@@ -198,7 +197,6 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
                 break;
         }
     }
-
     //设置点击的文本变红
     @SuppressLint("ResourceType")
     private void initText(TextView tv) {
@@ -219,39 +217,33 @@ public class HomeNewGoodTitleActivity extends BaseActivity<NewGoodsTitlePersente
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void setPopw() {
-        Resources res = getResources();
         View inflate = View.inflate(this,R.layout.popw, null);
-        popupWindow = new PopupWindow(inflate,ViewGroup.LayoutParams.MATCH_PARENT,200);
+        popupWindow = new PopupWindow(inflate,ViewGroup.LayoutParams.MATCH_PARENT,300);
 
         LinearLayout li1 = inflate.findViewById(R.id.li1);
-//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
-        for (int i = 0; i < filterCategory.size(); i++) {
-            View inflate1 = LayoutInflater.from(this).inflate(R.layout.popw_item, null);
-            TextView tv = inflate1.findViewById(R.id.item_tv);
-            tv.setText(filterCategory.get(i).getName());
-//            tv.setLayoutParams(layoutParams);
-            tv.setGravity(Gravity.CENTER);
-            int finalI = i;
-            tv.setTag(i);
-            Drawable drawable = res.getDrawable(R.drawable.stroke_black);
-            tv.setBackground(drawable);
-            li1.addView(inflate1);
-            inflate1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    NewGoodsTitleBean.DataBeanX.FilterCategoryBean filterCategoryBean = filterCategory.get(finalI);
-                    categoryId = filterCategoryBean.getId();
-                    HashMap<String, String> stringStringHashMap = new HashMap<>();
-                    stringStringHashMap.put("isNew", 1 + "");
-                    stringStringHashMap.put("categoryId", categoryId + "");
-                    persenter.gethomenewgoodstitle(stringStringHashMap);
-                    popupWindow.dismiss();
-                }
-            });
-            Toast.makeText(this, ""+i, Toast.LENGTH_SHORT).show();
+        RecyclerView pwrcy = li1.findViewById(R.id.pw_rcy);
+        pwrcy.setLayoutManager(new GridLayoutManager(this,5));
+        //创建适配器
+        HomeNewGoodsTitlePwAdpter newGoodsTitlePwAdpter = new HomeNewGoodsTitlePwAdpter(this,filterCategory);
+        pwrcy.setAdapter(newGoodsTitlePwAdpter);
+
+        newGoodsTitlePwAdpter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                NewGoodsTitleBean.DataBeanX.FilterCategoryBean filterCategoryBean = filterCategory.get(pos);
+                categoryId = filterCategoryBean.getId();
+                HashMap<String, String> stringStringHashMap = new HashMap<>();
+                stringStringHashMap.put("isNew", 1 + "");
+                stringStringHashMap.put("categoryId", categoryId + "");
+                persenter.gethomenewgoodstitle(stringStringHashMap);
+                popupWindow.dismiss();
+            }
+        });
+
+        popupWindow.showAsDropDown(newgoodKind);
         }
-        popupWindow.showAsDropDown(con);
-    }
+
+
 
     @Override
     public void showTips(String tips) {

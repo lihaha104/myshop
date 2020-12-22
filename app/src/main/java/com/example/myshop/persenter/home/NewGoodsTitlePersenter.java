@@ -20,7 +20,7 @@ public class NewGoodsTitlePersenter extends BasePresenter<INewGoodsTitle.View> i
 
     @Override
     public void gethomenewgoodstitle(Map map) {
-        model.gethomenewgoodstitle(new Callback<NewGoodsTitleBean>() {
+        this.model.gethomenewgoodstitle(new Callback<NewGoodsTitleBean>() {
             @Override
             public void success(NewGoodsTitleBean newGoodsTitleBean) {
                view.gethomenewgoodstitleReturn(newGoodsTitleBean);

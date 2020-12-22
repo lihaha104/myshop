@@ -69,10 +69,15 @@ public class MainActivity extends AppCompatActivity {
     private void initVp() {
         //创建集合
         ArrayList<Fragment> fragments = new ArrayList<>();
+        //首页
         fragments.add(new HomeFragment());
+        //专题
         fragments.add(new TopicFragment());
+        //分类
         fragments.add(new SortFragment());
+        //购物
         fragments.add(new ShopFragment());
+        //我的
         fragments.add(new MeFragment());
         //创建适配器
         FragmentAdpter fragmentAdpter = new FragmentAdpter(getSupportFragmentManager(),fragments);

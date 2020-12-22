@@ -85,6 +85,7 @@ public class HomeItemActivity extends BaseActivity<ChannelTabPersenter> implemen
             }
         });
         homeitemTab.setupWithViewPager(homeitemVp);
+
         for (int i = 0; i < brotherCategory.size(); i++) {
             int bid = brotherCategory.get(i).getId();
             if(String.valueOf(bid).equals(id)){
