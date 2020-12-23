@@ -1,5 +1,6 @@
 package com.example.myshop.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -89,5 +90,10 @@ public class MainActivity extends AppCompatActivity {
         mTab.getTabAt(2).setText(R.string.bar_name_sort).setIcon(R.drawable.selectsort);
         mTab.getTabAt(3).setText(R.string.bar_name_shop).setIcon(R.drawable.selectshop);
         mTab.getTabAt(4).setText(R.string.bar_name_me).setIcon(R.drawable.selectme);
+        Intent intent = getIntent();
+        if(intent.hasExtra("indext")){
+            int indext = intent.getIntExtra("indext",0);
+            mVp.setCurrentItem(indext);
+        }
     }
 }

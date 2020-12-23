@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.home.HomeHotGoodsItemActivity"></activity>
+        <activity android:name=".ui.LoginActivity"></activity>
+        <activity android:name=".ui.home.BigImageActivity" />
+        <activity android:name=".ui.home.HomeItemDetailsActivity" />
         <activity android:name=".ui.home.HomeNewGoodTitleActivity" />
         <activity android:name=".ui.home.HomeBrandTitleImgActivity" />
         <activity android:name=".ui.home.HomeBrandTitleActivity" />

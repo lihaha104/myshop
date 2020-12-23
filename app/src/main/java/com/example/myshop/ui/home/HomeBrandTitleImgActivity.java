@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myshop.R;
 import com.example.myshop.base.BaseActivity;
+import com.example.myshop.base.BaseAdapter;
 import com.example.myshop.interfaces.home.IBrandTitleImg;
 import com.example.myshop.model.home.BrandTitleImgBean;
 import com.example.myshop.model.home.BrandTitleImgRcyBean;
@@ -76,6 +77,14 @@ public class HomeBrandTitleImgActivity extends BaseActivity<BrandTitleImgPersent
         titleImgRcy.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
         HomeBrandTitleImgAdpter homeBrandTitleImgAdpter = new HomeBrandTitleImgAdpter(this,data);
         titleImgRcy.setAdapter(homeBrandTitleImgAdpter);
+        homeBrandTitleImgAdpter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                Intent intent = new Intent(HomeBrandTitleImgActivity.this,HomeItemDetailsActivity.class);
+                intent.putExtra("id",data.get(pos).getId());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

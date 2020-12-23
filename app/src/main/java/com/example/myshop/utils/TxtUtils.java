@@ -10,5 +10,10 @@ public class TxtUtils {
             textView.setText(word);
         }
     }
+    public static void setTextView(TextView textView,int word){
+        if(textView != null ){
+            textView.setText(word+"");
+        }
+    }
 
 }

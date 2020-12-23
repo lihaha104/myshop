@@ -1,6 +1,7 @@
 package com.example.myshop.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -31,5 +32,14 @@ public class HomeCategoryAdpter extends BaseAdapter<HomeModelBean.DataBean.Categ
         HomeCategorySonAdapter goodAdapter = new HomeCategorySonAdapter(context,data.getGoodsList());
         recyclerView.setLayoutManager(new GridLayoutManager(context,2));
         recyclerView.setAdapter(goodAdapter);
+        goodAdapter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                Intent intent = new Intent(context, HomeItemDetailsActivity.class);
+                intent.putExtra("id",data.getGoodsList().get(pos).getId());
+                context.startActivity(intent);
+            }
+        });
+
     }
 }

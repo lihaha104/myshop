@@ -1,11 +1,13 @@
 package com.example.myshop.ui.home;
 
+import android.content.Intent;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myshop.R;
+import com.example.myshop.base.BaseAdapter;
 import com.example.myshop.base.BaseFragment;
 import com.example.myshop.interfaces.home.IChannelRcy;
 import com.example.myshop.model.home.ChannelRcyBean;
@@ -59,6 +61,14 @@ public class HomeItemFragment extends BaseFragment<ChannelRcyPersenter> implemen
         //创建适配器
         HomeItemFragmentAdpter homeItemFragmentAdpter = new HomeItemFragmentAdpter(getActivity(), data);
         rcy.setAdapter(homeItemFragmentAdpter);
+        homeItemFragmentAdpter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                Intent intent = new Intent(getActivity(), HomeItemDetailsActivity.class);
+                intent.putExtra("id",data.get(pos).getId());
+                startActivity(intent);
+            }
+        });
 
     }
 

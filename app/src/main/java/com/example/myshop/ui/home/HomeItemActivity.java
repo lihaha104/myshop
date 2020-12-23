@@ -94,6 +94,7 @@ public class HomeItemActivity extends BaseActivity<ChannelTabPersenter> implemen
             }
         }
 
+
     }
 
     @Override

@@ -152,6 +152,14 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
         recyNewgood.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         HomeNewGoodsAdpter homeNewfoodsAdpter = new HomeNewGoodsAdpter(getActivity(), newGoodsList);
         recyNewgood.setAdapter(homeNewfoodsAdpter);
+        homeNewfoodsAdpter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                Intent intent = new Intent(getActivity(), HomeItemDetailsActivity.class);
+                intent.putExtra("id",newGoodsList.get(pos).getId());
+                startActivity(intent);
+            }
+        });
     }
 
     //获得HotGoodsList数据
@@ -163,7 +171,9 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
         homeHotfoodsAdpter.addListClick(new BaseAdapter.IListClick() {
             @Override
             public void itemClick(int pos) {
-                startActivity(new Intent(getActivity(),HomeHotGoodsItemActivity.class));
+                Intent intent = new Intent(getActivity(), HomeItemDetailsActivity.class);
+                intent.putExtra("id",hotGoodsList.get(pos).getId());
+                startActivity(intent);
             }
         });
     }
@@ -185,6 +195,7 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
         });
         HomeCategoryAdpter homeCategoryAdpter = new HomeCategoryAdpter(getActivity(), categoryList);
         recyCategory.setAdapter(homeCategoryAdpter);
+
     }
 
 
