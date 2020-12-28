@@ -1,18 +1,26 @@
 package com.example.myshop.ui.sort;
 
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myshop.R;
+import com.example.myshop.base.BaseAdapter;
 import com.example.myshop.base.BaseFragment;
 import com.example.myshop.interfaces.sort.ISort;
+import com.example.myshop.model.home.HomeModelBean;
 import com.example.myshop.model.sort.SortModelBean;
 import com.example.myshop.model.sort.SortModelRcyBean;
 import com.example.myshop.persenter.sort.SortPresenter;
+import com.example.myshop.ui.home.HomeBrandTitleActivity;
+import com.example.myshop.ui.home.HomeItemActivity;
+import com.example.myshop.ui.home.HomeItemDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +31,12 @@ public class SortSonFragment extends BaseFragment<SortPresenter> implements ISor
     private int id;
     private int i;
 
-    public SortSonFragment(int id,int i) {
+    public SortSonFragment() {
+    }
+
+    public SortSonFragment(int id, int i) {
         this.id = id;
-        this.i=i;
+        this.i = i;
     }
 
     @BindView(R.id.sort_son_img)
@@ -36,7 +47,6 @@ public class SortSonFragment extends BaseFragment<SortPresenter> implements ISor
     TextView sortSonTv;
     @BindView(R.id.sort_son_rcy)
     RecyclerView sortSonRcy;
-    private ArrayList<SortModelBean.DataBean.CategoryListBean> list;
 
     @Override
     protected int getLayout() {
@@ -76,8 +86,19 @@ public class SortSonFragment extends BaseFragment<SortPresenter> implements ISor
 
         //设置rcy
         sortSonRcy.setLayoutManager(new GridLayoutManager(mContext,3));
-        SortSonFragmentAdpter sortSonFragmentAdpter = new SortSonFragmentAdpter(i,getActivity(),subCategoryList);
+        SortSonFragmentAdpter sortSonFragmentAdpter = new SortSonFragmentAdpter(getActivity(),subCategoryList);
         sortSonRcy.setAdapter(sortSonFragmentAdpter);
+        sortSonFragmentAdpter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                //跳转页面
+                int id = subCategoryList.get(pos).getId();
+                Intent intent = new Intent(getActivity(), HomeItemActivity.class);
+                intent.putExtra("id", SortSonFragment.this.id +"");
+                Toast.makeText(mContext, ""+ SortSonFragment.this.id, Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

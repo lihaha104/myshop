@@ -22,6 +22,8 @@ import com.example.myshop.base.BaseFragment;
 import com.example.myshop.interfaces.home.IHome;
 import com.example.myshop.model.home.HomeModelBean;
 import com.example.myshop.persenter.home.HomePersenter;
+import com.example.myshop.ui.MainActivity;
+import com.example.myshop.ui.topic.TopicActivity;
 import com.example.myshop.utils.TxtUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
@@ -51,6 +53,8 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
     TextView txtBrandTitle;
     @BindView(R.id.txt_newgood_title)
     TextView txtNewgoodTitle;
+    @BindView(R.id.txt_topic_title)
+    TextView txtTopicTitle;
 
 
     @Override
@@ -141,7 +145,7 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
             @Override
             public void itemClick(int pos) {
                 Intent intent = new Intent(getActivity(), HomeBrandTitleImgActivity.class);
-                intent.putExtra("id",brandList.get(pos).getId());
+                intent.putExtra("id", brandList.get(pos).getId());
                 getActivity().startActivity(intent);
             }
         });
@@ -156,7 +160,7 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
             @Override
             public void itemClick(int pos) {
                 Intent intent = new Intent(getActivity(), HomeItemDetailsActivity.class);
-                intent.putExtra("id",newGoodsList.get(pos).getId());
+                intent.putExtra("id", newGoodsList.get(pos).getId());
                 startActivity(intent);
             }
         });
@@ -172,7 +176,7 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
             @Override
             public void itemClick(int pos) {
                 Intent intent = new Intent(getActivity(), HomeItemDetailsActivity.class);
-                intent.putExtra("id",hotGoodsList.get(pos).getId());
+                intent.putExtra("id", hotGoodsList.get(pos).getId());
                 startActivity(intent);
             }
         });
@@ -183,6 +187,14 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
         recyTopic.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         HomeTopicfoodsAdpter homeTopicfoodsAdpter = new HomeTopicfoodsAdpter(getActivity(), topicList);
         recyTopic.setAdapter(homeTopicfoodsAdpter);
+        homeTopicfoodsAdpter.addListClick(new BaseAdapter.IListClick() {
+            @Override
+            public void itemClick(int pos) {
+                Intent intent = new Intent(getActivity(), TopicActivity.class);
+                intent.putExtra("id", topicList.get(pos).getId());
+                startActivity(intent);
+            }
+        });
     }
 
     //获得initCategoryList()数据
@@ -205,7 +217,7 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
     }
 
 
-    @OnClick({R.id.txt_brand_title, R.id.txt_newgood_title})
+    @OnClick({R.id.txt_brand_title, R.id.txt_newgood_title,R.id.txt_topic_title})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.txt_brand_title:
@@ -214,7 +226,13 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
                 getActivity().startActivity(intent);
                 break;
             case R.id.txt_newgood_title:
-                getActivity().startActivity(new Intent(getActivity(),HomeNewGoodTitleActivity.class));
+                getActivity().startActivity(new Intent(getActivity(), HomeNewGoodTitleActivity.class));
+                break;
+            case R.id.txt_topic_title:
+                Intent intent1 = new Intent(getActivity(), MainActivity.class);
+                intent1.putExtra("indext",1);
+                getActivity().startActivity(intent1);
+
                 break;
         }
     }

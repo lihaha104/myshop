@@ -16,7 +16,6 @@ public interface IShop {
         void getshop();
     }
 
-
     interface Model extends IBaseModel {
         void getshop(Callback callback);
     }

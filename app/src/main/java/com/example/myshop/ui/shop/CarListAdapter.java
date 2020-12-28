@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.example.myshop.R;
 import com.example.myshop.base.BaseAdapter;
 import com.example.myshop.model.shop.ShopCarDataBean;
+import com.example.myshop.view.NumberSelect;
 import com.youth.banner.loader.ImageLoader;
 
 import org.w3c.dom.Text;
@@ -49,19 +50,19 @@ public class CarListAdapter extends BaseAdapter<ShopCarDataBean.DataBean.CartLis
         TextView txtPrice = (TextView) vh.getViewById(R.id.txt_price);
         TextView txtNumber = (TextView) vh.getViewById(R.id.txt_number);
         TextView txtEditTitle = (TextView) vh.getViewById(R.id.txt_edit_title);
-        //NumberSelect numberSelect = (NumberSelect) vh.getViewById(R.id.layout_change);
+        NumberSelect numberSelect = (NumberSelect) vh.getViewById(R.id.layout_change);
 
         txtName.setVisibility(isEdit?View.GONE:View.VISIBLE);
         txtNumber.setVisibility(isEdit?View.GONE:View.VISIBLE);
         txtEditTitle.setVisibility(isEdit?View.VISIBLE:View.GONE);
-        //numberSelect.setVisibility(isEdit?View.VISIBLE:View.GONE);
+        numberSelect.setVisibility(isEdit?View.VISIBLE:View.GONE);
 
         // 设置选中状态
         checkBox.setChecked(isEdit?data.selectEdit:data.selectOrder);
         Glide.with(context).load(data.getList_pic_url()).into(imgItem);
         txtPrice.setText("￥"+data.getRetail_price());
         txtNumber.setText("X "+String.valueOf(data.getNumber()));
-       /* numberSelect.addPage(R.layout.layout_number_change);
+        numberSelect.addPage(R.layout.layout_number_change);
         numberSelect.addChangeNumber(new NumberSelect.ChangeNumber() {
             @Override
             public void change(int number) {
@@ -69,7 +70,6 @@ public class CarListAdapter extends BaseAdapter<ShopCarDataBean.DataBean.CartLis
                 data.setNumber(number);
             }
         });
-*/
         checkBox.setTag(data.getId());
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -81,17 +81,6 @@ public class CarListAdapter extends BaseAdapter<ShopCarDataBean.DataBean.CartLis
             }
         });
 
-       /* if(isEdit){
-            txtName.setVisibility(View.GONE);
-            txtNumber.setVisibility(View.GONE);
-            txtEditTitle.setVisibility(View.VISIBLE);
-            numberSelect.setVisibility(View.VISIBLE);
-        }else{
-            txtName.setVisibility(View.VISIBLE);
-            txtNumber.setVisibility(View.VISIBLE);
-            txtEditTitle.setVisibility(View.GONE);
-            numberSelect.setVisibility(View.GONE);
-        }*/
 
 
 

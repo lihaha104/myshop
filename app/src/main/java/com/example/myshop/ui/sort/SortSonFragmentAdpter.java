@@ -15,10 +15,9 @@ import com.example.myshop.utils.TxtUtils;
 import java.util.List;
 
 public class SortSonFragmentAdpter extends BaseAdapter<SortModelRcyBean.DataBean.CurrentCategoryBean.SubCategoryListBean> {
-    private int a;
-    public SortSonFragmentAdpter(int i,Context context, List<SortModelRcyBean.DataBean.CurrentCategoryBean.SubCategoryListBean> data) {
+    public SortSonFragmentAdpter(Context context, List<SortModelRcyBean.DataBean.CurrentCategoryBean.SubCategoryListBean> data) {
         super(context, data);
-        a=i;
+
     }
 
     @Override

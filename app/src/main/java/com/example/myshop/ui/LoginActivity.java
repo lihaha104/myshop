@@ -44,13 +44,17 @@ public class LoginActivity extends BaseActivity<LoginPersenter> implements ILogi
 
     @Override
     protected LoginPersenter createPrenter() {
-        return new LoginPersenter();
+        return new LoginPersenter(this);
     }
 
     @Override
     protected void initView() {
         //设值密码框为可见状态
         imgPw.setTag(1);
+    }
+    @Override
+    protected void initData() {
+
     }
 
     @OnClick({R.id.img_pw, R.id.btn_login,R.id.tv_regist})
@@ -93,10 +97,7 @@ public class LoginActivity extends BaseActivity<LoginPersenter> implements ILogi
             Toast.makeText(this, "账号或密码不能为空白", Toast.LENGTH_SHORT).show();;
         }
     }
-    @Override
-    protected void initData() {
 
-    }
 
     @Override
     public void loginReturn(LoginBean loginBean) {

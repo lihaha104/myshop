@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/dp_100"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <CheckBox
         android:id="@+id/checkbox"
@@ -68,7 +68,7 @@
         android:maxLines="1"
         android:visibility="gone"/>
 
-    <!--<com.client.widget.NumberSelect
+    <com.example.myshop.view.NumberSelect
         android:id="@+id/layout_change"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,9 +77,9 @@
         app:layout_constraintTop_toBottomOf="@id/txt_edit_title"
         app:layout_constraintRight_toRightOf="@id/txt_edit_title"
         android:layout_marginTop="@dimen/dp_20"
-        android:visibility="gone">
+       >
 
-    </com.client.widget.NumberSelect>-->
+    </com.example.myshop.view.NumberSelect>
 
 
 

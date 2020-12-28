@@ -71,5 +71,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
     //垂直的tablayout
     implementation 'q.rorbin:VerticalTabLayout:1.2.5'
+    //ormlite数据库
+    implementation 'com.j256.ormlite:ormlite-android:5.1'
+    implementation 'com.j256.ormlite:ormlite-core:5.1'
 
-    }
+
+}

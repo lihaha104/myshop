@@ -178,27 +178,6 @@ public class HomeItemDetailsActivity extends BaseActivity<GoodDetailPersenter> i
         //购物车
         txt_addCar.setTag(0);//设置pw为未弹出状态
 
-        //加入购物车
-//        txt_addCar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                int tag = (int) txt_addCar.getTag();
-//                if(tag==0){
-//
-//                    WindowManager.LayoutParams attributes = getWindow().getAttributes();
-//                    attributes.alpha=0.5f;
-//                    getWindow().setAttributes(attributes);
-//                    txt_addCar.setTag( 1 );//pw为弹出状态
-//                }else{
-//                    popupWindow.dismiss();
-//                    WindowManager.LayoutParams attributes = getWindow().getAttributes();
-//                    attributes.alpha=1f;
-//                    getWindow().setAttributes(attributes);
-//                    txt_addCar.setTag( 0 );
-//                }
-//            }
-//        });
-
 
     }
     private void initGoodDetail(String goods_desc) {

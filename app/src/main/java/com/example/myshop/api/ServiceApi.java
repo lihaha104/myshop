@@ -14,6 +14,9 @@ import com.example.myshop.model.shop.ShopCarDataBean;
 import com.example.myshop.model.regist.MyRegisterBean;
 import com.example.myshop.model.sort.SortModelBean;
 import com.example.myshop.model.sort.SortModelRcyBean;
+import com.example.myshop.model.topic.TopicCommentBean;
+import com.example.myshop.model.topic.TopicDetailBean;
+import com.example.myshop.model.topic.TopicListBaen;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +58,13 @@ public interface ServiceApi {
     @GET("api/goods/detail")
     Flowable<GoodDetailBean> getGoodDetail(@Query("id") int id);
 
-
+    /*-------------专题--------------*/
+    @GET("api/topic/detail")
+    Flowable<TopicDetailBean> gettopicdetail(@Query("id") int id);
+    @GET("api/comment/list")
+    Flowable<TopicCommentBean> gettopiccomment(@QueryMap Map<String,String> map);
+    @GET("api/topic/list")
+    Flowable<TopicListBaen> gettopiclist(@Query("page") int page);
 
 
 
@@ -64,6 +73,10 @@ public interface ServiceApi {
     Flowable<SortModelBean>  getsort();
     @GET("api/catalog/current")
     Flowable<SortModelRcyBean>  getsortRcy(@Query("id") String id);
+
+
+
+
 
     /*-------------注册--------------*/
     //注册接口
@@ -76,13 +89,14 @@ public interface ServiceApi {
     @FormUrlEncoded
     Flowable<LoginBean> myLogin(@Field("username")String username, @Field("password") String pwd);
 
+    //购物车列表
+    @GET("api/cart/index")
+    Flowable<ShopCarDataBean> getCarList();
+
     //添加到购物车
     @POST("api/cart/add")
     @FormUrlEncoded
     Flowable<ShopCarDataBean> addCar(@FieldMap HashMap<String,String> map);
 
-    //购物车列表
-    @GET("api/cart/index")
-    Flowable<ShopCarDataBean> getCarList();
 
 }
