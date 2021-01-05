@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SplaceActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class SplaceActivity extends AppCompatActivity{
 
     @BindView(R.id.splace_btn)
     Button splaceBtn;
@@ -40,11 +40,10 @@ public class SplaceActivity extends AppCompatActivity implements ViewPager.OnPag
     ImageView dot3;
     @BindView(R.id.dot)
     LinearLayout dot;
+    @BindView(R.id.now)
+    Button now;
 
-    private ImageView[] dots;
     private ArrayList<View> views;
-
-    private int[] ids = {R.id.dot1, R.id.dot2, R.id.dot3};
 
     int num = 15;
     Handler handler = new Handler() {
@@ -55,12 +54,12 @@ public class SplaceActivity extends AppCompatActivity implements ViewPager.OnPag
                 num--;
 
                 if (num == 0) {
-                    splaceBtn.setText("倒计时："+num);
+                    splaceBtn.setText("倒计时：" + num);
                     timer.cancel();
                     startActivity(new Intent(SplaceActivity.this, MainActivity.class));
                     finish();
                 } else if (num <= 10) {
-                    splaceBtn.setText("跳过："+num);
+                    splaceBtn.setText("跳过：" + num);
                     splaceBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -69,7 +68,7 @@ public class SplaceActivity extends AppCompatActivity implements ViewPager.OnPag
                     });
                     handler.sendEmptyMessageDelayed(1, 1000);
                 } else {
-                    splaceBtn.setText("倒计时："+num);
+                    splaceBtn.setText("倒计时：" + num);
                     handler.sendEmptyMessageDelayed(1, 1000);
 
                 }
@@ -83,21 +82,7 @@ public class SplaceActivity extends AppCompatActivity implements ViewPager.OnPag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splace);
         ButterKnife.bind(this);
-        inittime();
         initVp();
-        initDots();
-    }
-
-    private void inittime() {
-        timer = new Timer();
-        splaceBtn.setText("倒计时："+num);
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-
-                handler.sendEmptyMessage(1);
-            }
-        }, 1000, 15000);
     }
 
     private void initVp() {
@@ -109,6 +94,7 @@ public class SplaceActivity extends AppCompatActivity implements ViewPager.OnPag
         views.add(vp1);
         views.add(vp2);
         views.add(vp3);
+        //创建爱你适配器
         splaceVp.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
@@ -133,36 +119,74 @@ public class SplaceActivity extends AppCompatActivity implements ViewPager.OnPag
                 container.removeView((View) object);
             }
         });
-        splaceVp.addOnPageChangeListener(this);
+        //给vp设监听
+        splaceVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    }
-
-    private void initDots() {
-        dots = new ImageView[views.size()];
-        for (int i = 0; i < views.size(); i++) {
-            dots[i] = (ImageView) findViewById(ids[i]);
-        }
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-    @Override
-    public void onPageSelected(int position) {
-        for (int i = 0; i < ids.length; i++) {
-            if (position == i) {
-                dots[i].setImageResource(R.mipmap.ic_menu_sort_pressed);
-            } else {
-                dots[i].setImageResource(R.mipmap.ic_menu_sort_nor);
             }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        setdotselect(true, false, false);
+                        break;
+                    case 1:
+                        setdotselect(false, true, false);
+                        break;
+                    case 2:
+                        setdotselect(false, false, true);
+                        splaceBtn.setVisibility(View.VISIBLE);
+                        inittime();
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+    }
+    //设置小圆点的选中效果
+    private void setdotselect(boolean isCheck1, boolean isCheck2, boolean isCheck3) {
+        if (isCheck1) {
+           dot1.setImageResource(R.mipmap.ic_menu_sort_pressed);
+        } else {
+            dot1.setImageResource(R.mipmap.ic_menu_sort_nor);
+        }
+
+        if (isCheck2) {
+            dot2.setImageResource(R.mipmap.ic_menu_sort_pressed);
+        } else {
+            dot2.setImageResource(R.mipmap.ic_menu_sort_nor);
+        }
+        if (isCheck3) {
+            dot3.setImageResource(R.mipmap.ic_menu_sort_pressed);
+        } else {
+            dot3.setImageResource(R.mipmap.ic_menu_sort_nor);
         }
 
     }
-    @Override
-    public void onPageScrollStateChanged(int state) {
 
+    private void inittime() {
+        splaceBtn.setVisibility(View.VISIBLE);
+        timer = new Timer();
+        splaceBtn.setText("倒计时：" + num);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(1);
+            }
+        }, 1000, 15000);
     }
 
 
+    @OnClick(R.id.now)
+    public void onViewClicked() {
+        startActivity(new Intent(SplaceActivity.this, MainActivity.class));
+    }
 }

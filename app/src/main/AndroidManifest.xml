@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".model.shop.ShopAddressesAddActivity"></activity>
+        <activity android:name=".ui.LauncherActivity"></activity>
+        <activity android:name=".model.shop.ShopAddressesAddActivity" />
         <activity android:name=".ui.shop.ShopAddressesActivity" />
         <activity android:name=".ui.RegistActivity" />
         <activity android:name=".ui.me.UserDetailActivity" />

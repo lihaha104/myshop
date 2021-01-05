@@ -1,6 +1,7 @@
 package com.example.myshop.api;
 
 
+import com.example.myshop.model.app.AppBean;
 import com.example.myshop.model.home.BrandTitleImgBean;
 import com.example.myshop.model.home.BrandTitleImgRcyBean;
 import com.example.myshop.model.home.GoodDetailBean;
@@ -10,6 +11,7 @@ import com.example.myshop.model.home.NewGoodsTitleBean;
 import com.example.myshop.model.home.ChannelRcyBean;
 import com.example.myshop.model.home.ChannelTabBean;
 import com.example.myshop.model.login.LoginBean;
+import com.example.myshop.model.me.UserInfoBean;
 import com.example.myshop.model.shop.AddressAddProvinceBean;
 import com.example.myshop.model.shop.AddressBean;
 import com.example.myshop.model.shop.DeleteCarBean;
@@ -93,6 +95,8 @@ public interface ServiceApi {
     @FormUrlEncoded
     Flowable<LoginBean> myLogin(@Field("username")String username, @Field("password") String pwd);
 
+
+    /*------------购物车-----------*/
     //购物车列表
     @GET("api/cart/index")
     Flowable<ShopCarDataBean> getCarList();
@@ -119,4 +123,14 @@ public interface ServiceApi {
     //获得省市接口数据
     @GET("region/list") //parentId  1
     Flowable<AddressAddProvinceBean> getAddressAddProvince(@Query("parentId")int parentId);
+
+    //用户信息更新
+    @POST("api/user/updateUserInfo")
+    @FormUrlEncoded
+    Flowable<UserInfoBean> updateUserInfo(@FieldMap Map<String,String> map);
+
+    //版本更新
+    @GET("api/apk/appinfo")
+    Flowable<AppBean> getAppInfo();
+
 }
