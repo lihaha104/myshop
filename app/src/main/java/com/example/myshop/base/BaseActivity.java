@@ -14,7 +14,7 @@ import com.example.myshop.interfaces.IBaseView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<P extends IBasePresenter> extends AppCompatActivity implements IBaseView {
 
 
     protected P persenter;

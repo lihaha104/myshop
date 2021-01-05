@@ -1,2 +1,4 @@
+include ':mymvp'
+include ':mylibrary'
 include ':app'
 rootProject.name = "MyShop"

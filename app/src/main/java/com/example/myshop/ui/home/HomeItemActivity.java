@@ -50,7 +50,7 @@ public class HomeItemActivity extends BaseActivity<ChannelTabPersenter> implemen
     protected void initData() {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        Toast.makeText(this, ""+id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "lihahaha"+id, Toast.LENGTH_SHORT).show();
         persenter.gethometab(id);
     }
 

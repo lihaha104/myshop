@@ -318,12 +318,13 @@
             android:layout_height="match_parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/layout_car">
+
             <ImageView
                 android:id="@+id/img_collect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_collect_normal"
-                android:layout_gravity="center"/>
+                android:layout_width="21dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@mipmap/nocollcation" />
         </FrameLayout>
         <FrameLayout
             android:id="@+id/layout_car"
@@ -335,8 +336,9 @@
             <ImageView
                 android:id="@+id/img_car"
                 android:layout_width="wrap_content"
-                android:layout_height="10dp"
+                android:layout_height="@dimen/dp_20"
                 android:layout_gravity="center"
+                android:scaleType="fitXY"
                 android:src="@mipmap/ic_car" />
 
             <TextView

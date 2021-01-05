@@ -7,5 +7,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="address_add_txt">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_60</item>
+        <item name="title_textsize">@dimen/dp_22</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 
+    <style name="MyCustomTabTextAppearance">
+        <item name="android:textSize">17sp</item>
+    </style>
 </resources>

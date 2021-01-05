@@ -9,14 +9,18 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myshop.R;
+import com.example.myshop.app.MyApp;
 import com.example.myshop.base.BaseAdapter;
 import com.example.myshop.base.BaseFragment;
 import com.example.myshop.interfaces.shop.IShop;
+import com.example.myshop.model.shop.DeleteCarBean;
 import com.example.myshop.model.shop.ShopCarDataBean;
+import com.example.myshop.model.shop.UpdateCarBean;
 import com.example.myshop.persenter.shop.ShopCarPersenter;
 import com.example.myshop.ui.LoginActivity;
 import com.example.myshop.utils.SpUtils;
@@ -117,6 +121,12 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        presenter.getshop();
+    }
+
     private void gotoLogin() {
         startActivity(new Intent(mContext, LoginActivity.class));
     }
@@ -124,6 +134,7 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
     @Override
     public void getShopReturn(ShopCarDataBean carBean) {
         shopCarDataBean=carBean;
+        cartListBeans.clear();
         List<ShopCarDataBean.DataBean.CartListBean> cartList = carBean.getData().getCartList();
         cartListBeans.addAll(cartList);
         carListAdapter.notifyDataSetChanged();
@@ -152,6 +163,59 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
 
     }
 
+    //修改列表
+    @Override
+    public void updateShopCarReturn(UpdateCarBean result) {
+        for(UpdateCarBean.DataBean.CartListBean item:result.getData().getCartList()){
+            updateCartListBeanNumberById(item.getId(),item.getNumber());
+        }
+        //更新商品的总数和总价
+        shopCarDataBean.getData().getCartTotal().setGoodsCount(result.getData().getCartTotal().getGoodsCount());
+        shopCarDataBean.getData().getCartTotal().setGoodsAmount(result.getData().getCartTotal().getGoodsAmount());
+        carListAdapter.notifyDataSetChanged();
+        totalSelectEdit();
+    }
+    /**
+     * 刷新购物车列表的数据
+     * @param carId
+     * @param number
+     */
+    private void updateCartListBeanNumberById(int carId,int number){
+        for(ShopCarDataBean.DataBean.CartListBean item:cartListBeans){
+            if(item.getId() == carId){
+                item.setNumber(number);
+                break;
+            }
+        }
+    }
+    //删除列表
+    @Override
+    public void deleteShopCarReturn(DeleteCarBean result) {
+        //通过购物车返回的最新数据，同步本地列表中的数据
+        int index,lg=cartListBeans.size();
+        for(index=0;index<lg; index++){
+            ShopCarDataBean.DataBean.CartListBean item = cartListBeans.get(index);
+            boolean bool = deleteCarListById(result.getData().getCartList(),item.getId());
+            Log.i("TAG","delete bool:"+bool +" item:"+item.getId());
+            if(bool){
+                cartListBeans.remove(index);
+                index--;
+                lg--;
+            }
+
+        }
+        carListAdapter.notifyDataSetChanged();
+        totalSelectEdit();
+    }
+    private boolean deleteCarListById(List<DeleteCarBean.DataBean.CartListBean> list ,int carId){
+        for(DeleteCarBean.DataBean.CartListBean item:list){
+            if(item.getId() == carId){
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * 编辑状态下的数据刷新
      */
@@ -159,7 +223,7 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
         for(ShopCarDataBean.DataBean.CartListBean item:cartListBeans){
             item.selectOrder = b;
         }
-          totalSelectEdit();
+          totalSelectOrder();
         // 更新列表条目的选中状态
         carListAdapter.notifyDataSetChanged();
     }
@@ -181,12 +245,14 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
         int num = 0;
         int totalPrice = 0;
         boolean isSelectAll = true;
-        for(ShopCarDataBean.DataBean.CartListBean item:shopCarDataBean.getData().getCartList()){
+        for(ShopCarDataBean.DataBean.CartListBean item:cartListBeans){
             if(item.selectOrder){
                 num += item.getNumber();
                 totalPrice += item.getNumber()*item.getRetail_price();
             }else{
+                if(isSelectAll){
                     isSelectAll = false;
+                }
             }
         }
         String strAll = "全选($)";
@@ -208,7 +274,9 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
                 num += item.getNumber();
                 totalPrice += item.getNumber()*item.getRetail_price();
             }else{
+                if(isSelectAll){
                     isSelectAll = false;
+                }
             }
         }
         String strAll = "全选($)";
@@ -243,8 +311,8 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
         }else{
             txtEdit.setText("编辑");
             txtSubmit.setText("下单");
-            isEdit = true;
-            updateGoodSelectStateEdit(true);
+            isEdit = false;
+            updateGoodSelectStateEdit(false);
         }
         carListAdapter.setEditState(isEdit);
         carListAdapter.notifyDataSetChanged();
@@ -255,24 +323,26 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
 
     private void submit(){
         if("下单".equals(txtSubmit.getText().toString())){
-            Toast.makeText(mContext, "要下单了", Toast.LENGTH_SHORT).show();
             //下单
-        }else if("删除所选".equals(txtSubmit.getText().toString())){
-           //delete();
-            if(posi>=0){
-                cartListBeans.remove(posi);
-                carListAdapter.notifyDataSetChanged();
-            }else{
-                Toast.makeText(mContext, "没有数据了", Toast.LENGTH_SHORT).show();  
-            }
-            Toast.makeText(mContext, "z这块是删除", Toast.LENGTH_SHORT).show();
+            order();
 
+        }else if("删除所选".equals(txtSubmit.getText().toString())){
+            //删除购物车所选数据
+            deleteCar();
         }
     }
+    //下单
+    private void order() {
 
-    private void delete() {
-        //删除购物车所选数据
-       
+        Intent intent = new Intent(mContext, OrderActivity.class);
+        MyApp.getMap().put("shop",cartListBeans);
+        startActivity(intent);
+    }
+
+    /**
+     *删除所有选中的商品数据
+     */
+    private void deleteCar(){
         StringBuilder sb = new StringBuilder();
         for(ShopCarDataBean.DataBean.CartListBean item:cartListBeans){
             if(item.selectEdit){
@@ -280,13 +350,14 @@ public class ShopFragment extends BaseFragment<ShopCarPersenter> implements ISho
                 sb.append(",");
             }
         }
-        if(sb.length()> 1){
+        if(sb.length() > 0){
             sb.deleteCharAt(sb.length()-1);
-        }else{
-            Toast.makeText(mContext, "购物车中没有东西了哦", Toast.LENGTH_SHORT).show();
         }
-//            presenter.deleteCar(sb.toString());
+        Log.i("TAG",sb.toString());
+        presenter.deleteShopCar(sb.toString());
     }
+
+
 
     @Override
     public void showTips(String tips) {

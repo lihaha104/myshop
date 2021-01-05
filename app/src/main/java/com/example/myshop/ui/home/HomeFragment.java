@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ import com.example.myshop.persenter.home.HomePersenter;
 import com.example.myshop.ui.MainActivity;
 import com.example.myshop.ui.topic.TopicActivity;
 import com.example.myshop.utils.TxtUtils;
+import com.live.RoomActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -55,6 +57,10 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
     TextView txtNewgoodTitle;
     @BindView(R.id.txt_topic_title)
     TextView txtTopicTitle;
+    @BindView(R.id.zhibo)
+    Button zhibo;
+    @BindView(R.id.txt_hotgood_title)
+    TextView txtHotgoodTitle;
 
 
     @Override
@@ -217,7 +223,7 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
     }
 
 
-    @OnClick({R.id.txt_brand_title, R.id.txt_newgood_title,R.id.txt_topic_title})
+    @OnClick({R.id.txt_brand_title, R.id.txt_newgood_title, R.id.txt_topic_title})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.txt_brand_title:
@@ -230,10 +236,15 @@ public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.V
                 break;
             case R.id.txt_topic_title:
                 Intent intent1 = new Intent(getActivity(), MainActivity.class);
-                intent1.putExtra("indext",1);
+                intent1.putExtra("indext", 1);
                 getActivity().startActivity(intent1);
 
                 break;
         }
+    }
+
+    @OnClick(R.id.zhibo)
+    public void onViewClicked() {
+            startActivity(new Intent(getActivity(), RoomActivity.class));
     }
 }

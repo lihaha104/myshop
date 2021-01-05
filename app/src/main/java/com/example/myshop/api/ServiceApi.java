@@ -10,8 +10,12 @@ import com.example.myshop.model.home.NewGoodsTitleBean;
 import com.example.myshop.model.home.ChannelRcyBean;
 import com.example.myshop.model.home.ChannelTabBean;
 import com.example.myshop.model.login.LoginBean;
+import com.example.myshop.model.shop.AddressAddProvinceBean;
+import com.example.myshop.model.shop.AddressBean;
+import com.example.myshop.model.shop.DeleteCarBean;
 import com.example.myshop.model.shop.ShopCarDataBean;
 import com.example.myshop.model.regist.MyRegisterBean;
+import com.example.myshop.model.shop.UpdateCarBean;
 import com.example.myshop.model.sort.SortModelBean;
 import com.example.myshop.model.sort.SortModelRcyBean;
 import com.example.myshop.model.topic.TopicCommentBean;
@@ -96,7 +100,23 @@ public interface ServiceApi {
     //添加到购物车
     @POST("api/cart/add")
     @FormUrlEncoded
-    Flowable<ShopCarDataBean> addCar(@FieldMap HashMap<String,String> map);
+    Flowable<ShopCarDataBean> addCar(@FieldMap Map<String,String> map);
 
+    //更新购物车的数据
+    @POST("api/cart/update")
+    @FormUrlEncoded
+    Flowable<UpdateCarBean> updateCar(@FieldMap Map<String,String> map);
 
+    //删除购物车数据
+    @POST("api/cart/delete")
+    @FormUrlEncoded
+    Flowable<DeleteCarBean> deleteCar(@Field("productIds") String productIds);
+
+    //收获地址列表
+    @GET("address/list")
+    Flowable<AddressBean> getAddress();
+
+    //获得省市接口数据
+    @GET("region/list") //parentId  1
+    Flowable<AddressAddProvinceBean> getAddressAddProvince(@Query("parentId")int parentId);
 }

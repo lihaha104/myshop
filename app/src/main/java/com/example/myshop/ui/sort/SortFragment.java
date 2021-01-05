@@ -1,10 +1,13 @@
 package com.example.myshop.ui.sort;
 
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.myshop.R;
@@ -59,11 +62,14 @@ public class SortFragment extends BaseFragment<SortPresenter> implements ISort.V
         ArrayList<String> strings = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
             SortModelBean.DataBean.CategoryListBean categoryListBean = categoryList.get(i);
-            SortSonFragment sortSonFragment = new SortSonFragment(categoryList.get(i).getId(),i);
+            SortSonFragment sortSonFragment = new SortSonFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("id",categoryList.get(i).getId());
+            sortSonFragment.setArguments(bundle);
             fragments.add(sortSonFragment);
             strings.add(categoryListBean.getName());
         }
-        sortVp.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
+        sortVp.setAdapter(new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @NonNull
             @Override
             public Fragment getItem(int position) {

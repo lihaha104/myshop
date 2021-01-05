@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:id="@+id/con"
+    tools:context=".model.shop.ShopAddressesAddActivity">
+    <EditText
+        android:id="@+id/address_add_name"
+        android:hint="姓名"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/address_add_txt"
+        />
+
+    <EditText
+        android:id="@+id/address_add_phone"
+        android:hint="手机号码"
+        app:layout_constraintTop_toBottomOf="@+id/address_add_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/address_add_txt"
+        />
+
+    <EditText
+        android:id="@+id/address_add_sheng_qu_xian"
+        android:hint="省份、城市、区县"
+        app:layout_constraintTop_toBottomOf="@+id/address_add_phone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/address_add_txt"
+        />
+
+    <EditText
+        android:id="@+id/address_add_xiangxi"
+        android:hint="详细地址、如街道、楼盘号等"
+        app:layout_constraintTop_toBottomOf="@+id/address_add_sheng_qu_xian"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        style="@style/address_add_txt"
+        />
+
+    <RadioGroup
+        app:layout_constraintTop_toBottomOf="@+id/address_add_xiangxi"
+        android:gravity="center"
+        android:background="@color/gray_word"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/address_add_moren"
+            android:text="设为默认地址"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/address_add_btn_cancel"
+            android:text="取消"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/address_add_btn_ok"
+            android:text="保存"
+            android:background="@color/red"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

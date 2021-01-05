@@ -1,5 +1,6 @@
 package com.example.myshop.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -85,7 +86,7 @@ public class LoginActivity extends BaseActivity<LoginPersenter> implements ILogi
     }
 
     private void regist() {
-
+        startActivity(new Intent(this,RegistActivity.class));
     }
 
     private void login() {

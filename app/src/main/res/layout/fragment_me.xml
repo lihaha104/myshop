@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout android:orientation="vertical"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
             android:id="@+id/con"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/dp_150"
-            android:background="#24282B">
+            android:background="#5388B0">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:text="我的"
-                android:textSize="@dimen/dp_14"
-                app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginLeft="@dimen/dp_20"
+                android:text="我的"
                 android:textColor="#FFFEFE"
-                />
+                android:textSize="@dimen/dp_14"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/me_head_img"
                 android:layout_width="@dimen/dp_80"
-                android:src="@drawable/tou"
                 android:layout_height="@dimen/dp_80"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:layout_marginTop="@dimen/dp_60"
-                />
+                android:src="@drawable/tou"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/me_head_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/me_head_img"
-                android:text="点击登录"
-                android:textSize="@dimen/dp_18"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:textColor="#FFFEFE"
                 android:layout_marginTop="@dimen/dp_80"
-                />
+                android:text="点击登录"
+                android:textColor="#FFFEFE"
+                android:textSize="@dimen/dp_18"
+                app:layout_constraintLeft_toRightOf="@+id/me_head_img"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
+
                 android:id="@+id/me_head_jt_img"
-                android:layout_width="@dimen/dp_30"
-                android:layout_height="@dimen/dp_30"
-                android:src="@mipmap/ic_menu_me_pressed"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginRight="@dimen/dp_10"
-                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="@dimen/dp_40"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_25"
                 android:layout_marginTop="@dimen/dp_75"
-                />
+                android:src="@drawable/ic_arrow_rt"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--    第一行-->

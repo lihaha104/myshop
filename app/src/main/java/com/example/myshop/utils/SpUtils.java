@@ -73,4 +73,11 @@ public class SpUtils {
     public void remove(String key){
         sp.edit().remove(key).commit();
     }
+    /**
+     * 删除所有
+     * */
+    public void delete(){
+        sp.edit().clear().commit();
+    }
+
 }

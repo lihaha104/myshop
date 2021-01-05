@@ -21,6 +21,7 @@ import com.example.myshop.persenter.sort.SortPresenter;
 import com.example.myshop.ui.home.HomeBrandTitleActivity;
 import com.example.myshop.ui.home.HomeItemActivity;
 import com.example.myshop.ui.home.HomeItemDetailsActivity;
+import com.example.myshop.ui.home.HomeItemFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +30,11 @@ import butterknife.BindView;
 
 public class SortSonFragment extends BaseFragment<SortPresenter> implements ISort.View {
     private int id;
-    private int i;
 
     public SortSonFragment() {
     }
 
-    public SortSonFragment(int id, int i) {
-        this.id = id;
-        this.i = i;
-    }
+
 
     @BindView(R.id.sort_son_img)
     ImageView sortSonImg;
@@ -55,7 +52,7 @@ public class SortSonFragment extends BaseFragment<SortPresenter> implements ISor
 
     @Override
     protected void initView() {
-
+        id = getArguments().getInt("id");
     }
 
     @Override
@@ -72,11 +69,10 @@ public class SortSonFragment extends BaseFragment<SortPresenter> implements ISor
 
     @Override
     public void getSortReturn(SortModelBean result) {
-        List<SortModelBean.DataBean.CategoryListBean> categoryList = result.getData().getCategoryList();
-        SortModelBean.DataBean.CategoryListBean categoryListBean = categoryList.get(i);
-        Glide.with(getActivity()).load(categoryListBean.getWap_banner_url()).into(sortSonImg);
-        sortSonName.setText(categoryListBean.getName());
-        sortSonTv.setText(categoryListBean.getFront_desc());
+        SortModelBean.DataBean.CurrentCategoryBean currentCategory = result.getData().getCurrentCategory();
+        Glide.with(getContext()).load(currentCategory.getWap_banner_url()).into(sortSonImg);
+        sortSonName.setText(currentCategory.getName());
+        sortSonTv.setText(currentCategory.getFront_desc());
 
    }
 
@@ -91,12 +87,11 @@ public class SortSonFragment extends BaseFragment<SortPresenter> implements ISor
         sortSonFragmentAdpter.addListClick(new BaseAdapter.IListClick() {
             @Override
             public void itemClick(int pos) {
-                //跳转页面
-                int id = subCategoryList.get(pos).getId();
+                int ids = subCategoryList.get(pos).getId();
                 Intent intent = new Intent(getActivity(), HomeItemActivity.class);
-                intent.putExtra("id", SortSonFragment.this.id +"");
-                Toast.makeText(mContext, ""+ SortSonFragment.this.id, Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+                intent.putExtra("id", ids+"");
+                Toast.makeText(getActivity(), "李佳鑫的tab："+ids+"", Toast.LENGTH_SHORT).show();
+              startActivity(intent);
             }
         });
     }

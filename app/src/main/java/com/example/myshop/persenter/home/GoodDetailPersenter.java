@@ -8,6 +8,9 @@ import com.example.myshop.model.home.GoodDetailBean;
 import com.example.myshop.model.home.GoodDetailModel;
 import com.example.myshop.model.home.HomeModel;
 import com.example.myshop.model.home.HomeModelBean;
+import com.example.myshop.model.shop.ShopCarDataBean;
+
+import java.util.Map;
 
 public class GoodDetailPersenter extends BasePresenter<IGoodDetail.View> implements IGoodDetail.Persenter {
     IGoodDetail.Model model;
@@ -31,5 +34,20 @@ public class GoodDetailPersenter extends BasePresenter<IGoodDetail.View> impleme
 
             }
         },id);
+    }
+
+    @Override
+    public void addShopCar(Map<String, String> map) {
+        model.addShopCar(map,new Callback<ShopCarDataBean>() {
+            @Override
+            public void success(ShopCarDataBean shopCarDataBean) {
+                view.addShopCarReturn(shopCarDataBean);
+            }
+
+            @Override
+            public void fail(String err) {
+
+            }
+        });
     }
 }
