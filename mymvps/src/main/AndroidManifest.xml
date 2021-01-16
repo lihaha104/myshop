@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mymvps">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application>
+        <activity android:name=".base.BaseActivity" />
+    </application>
+</manifest>
