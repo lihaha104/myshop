@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <ImageView
         android:id="@+id/img_channel"
         android:layout_width="@dimen/dp_30"
@@ -15,5 +15,4 @@
         android:gravity="center"
         android:layout_gravity="center_horizontal"
         android:paddingVertical="@dimen/dp_10"/>
-
 </LinearLayout>

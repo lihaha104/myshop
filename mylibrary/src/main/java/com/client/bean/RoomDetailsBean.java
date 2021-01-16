@@ -1,11 +1,11 @@
-package com.live.bean;
+package com.client.bean;
 
-public class CreateRoomBean {
+public class RoomDetailsBean {
 
     /**
      * errno : 0
      * errmsg :
-     * data : {"msg":"创建房间成功","id":15,"name":"小白的直播间","icon":"https://shop-app1.oss-cn-beijing.aliyuncs.com/live/1/room.jpg"}
+     * data : {"id":2,"name":"会玩的房间","icon":"https://shop-app1.oss-cn-beijing.aliyuncs.com/live/1/room.jpg"}
      */
 
     private int errno;
@@ -38,24 +38,14 @@ public class CreateRoomBean {
 
     public static class DataBean {
         /**
-         * msg : 创建房间成功
-         * id : 15
-         * name : 小白的直播间
+         * id : 2
+         * name : 会玩的房间
          * icon : https://shop-app1.oss-cn-beijing.aliyuncs.com/live/1/room.jpg
          */
 
-        private String msg;
         private int id;
         private String name;
         private String icon;
-
-        public String getMsg() {
-            return msg;
-        }
-
-        public void setMsg(String msg) {
-            this.msg = msg;
-        }
 
         public int getId() {
             return id;

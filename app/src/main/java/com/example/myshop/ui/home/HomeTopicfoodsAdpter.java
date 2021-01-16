@@ -5,8 +5,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.mymvps.base.BaseAdapter;
 import com.example.myshop.R;
-import com.example.myshop.base.BaseAdapter;
+
 import com.example.myshop.model.home.HomeModelBean;
 import com.example.myshop.utils.TxtUtils;
 

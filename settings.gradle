@@ -1,3 +1,4 @@
+include ':myhomework'
 include ':mymvps'
 include ':mymvp'
 include ':mylibrary'

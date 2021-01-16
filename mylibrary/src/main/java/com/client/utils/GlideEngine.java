@@ -1,4 +1,4 @@
-package com.example.mymvps.utils;
+package com.client.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.ImageViewTarget;
-import com.example.myshop.R;
+import com.example.mymvps.R;
 import com.luck.picture.lib.engine.ImageEngine;
 import com.luck.picture.lib.listener.OnImageCompleteCallback;
 import com.luck.picture.lib.tools.MediaUtils;

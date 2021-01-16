@@ -1,4 +1,4 @@
-package com.example.mymvps.utils;
+package com.client.utils;
 
 import android.text.TextUtils;
 import android.widget.TextView;

@@ -17,7 +17,8 @@ public abstract class CommonSubscriber<T> extends ResourceSubscriber<T> {
     private String errorMsg;
     private boolean isShowErrorState = false;
 
-    protected CommonSubscriber(Callback callback){
+    protected
+    CommonSubscriber(Callback callback){
         this.callback = callback;
     }
     protected CommonSubscriber(Callback callback, String emsg){

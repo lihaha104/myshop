@@ -1,4 +1,4 @@
-package com.example.mymvps.utils;
+package com.client.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.myshop.app.Constants;
-import com.example.myshop.app.MyApp;
+import com.example.mymvps.app.Constants;
+import com.example.mymvps.app.MyApp;
 
 
 public class ImageLoaderUtils {
@@ -22,7 +22,7 @@ public class ImageLoaderUtils {
     public static void loadImage(String url, ImageView img){
         //用key为image的值的时候来判断当前时无图还有有图模式
         if(SpUtils.getInstance().getBoolean("image") && img != null){
-            Glide.with(MyApp.app).load(url).into(img);
+            Glide.with(MyApp.application).load(url).into(img);
         }
     }
 

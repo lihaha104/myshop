@@ -3,11 +3,17 @@ package com.example.myshop.ui.me;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.myshop.R;
 import com.example.myshop.base.BaseFragment;
 import com.example.myshop.base.BasePresenter;
@@ -64,12 +70,17 @@ public class MeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        initData();
+        
     }
 
     @Override
     protected void initData() {
-
+        String token = SpUtils.getInstance().getString("token");
+        if (!TextUtils.isEmpty(token)) {
+            login(true);
+        } else {
+            login(false);
+        }
 
     }
 
@@ -77,9 +88,13 @@ public class MeFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.me_head_img://头像
+                startActivity(new Intent(getActivity(), LoginActivity.class));
                 break;
             case R.id.me_head_login://登录
-                login();
+                String token = SpUtils.getInstance().getString("token");
+                if (TextUtils.isEmpty(token)) {
+                    openLogin();//等于空跳转到登录
+                }
                 break;
             case R.id.me_head_jt_img://个人详情
                 startActivity(new Intent(getActivity(), UserDetailActivity.class));
@@ -90,19 +105,37 @@ public class MeFragment extends BaseFragment {
         }
     }
 
-    private void login() {
-        //判断是否登录过 如果登录过就跳转详情界面  如果没有就登录界面
-        String token = SpUtils.getInstance().getString("token");
-        if (!TextUtils.isEmpty(token)) {
-            //跳转用户详情把修改的数据带回来
-            Intent intent = new Intent(mContext, UserDetailActivity.class);
-            getActivity().startActivityForResult(intent, 100);
+    private void openLogin() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivityForResult(intent,LOGIN);
+    }
 
-        } else {
-            //跳转登录界面吧用户名带回来
+    private void login(boolean b) {
+        if (b) {
+            String username = SpUtils.getInstance().getString("username");
+            String avatar = SpUtils.getInstance().getString("avatar");
+             meHeadLogin.setText(username);
+            if (!TextUtils.isEmpty(avatar)) {
+                Glide.with(this).load(avatar).apply(new RequestOptions().circleCrop()).into(meHeadImg);
+            }
+        }else {
+            //登录界面
             Intent intent = new Intent(mContext, LoginActivity.class);
-            getActivity().startActivityForResult(intent, LOGIN);
+            getActivity().startActivityForResult(intent, 100);
+        }
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LOGIN && resultCode == 300) {
+            String username = data.getStringExtra("username");
+            String avatar = data.getStringExtra("avatar");
+            meHeadLogin.setText(username);
+            Glide.with(this).load(avatar).apply(new RequestOptions().circleCrop()).into(meHeadImg);
+        }
+        if (requestCode == LOGINOUT && resultCode == 89) {
+            login(false);
         }
     }
 

@@ -12,17 +12,14 @@ import com.example.myshop.persenter.home.BrandTitlePersenter;
 import java.util.List;
 
 import butterknife.BindView;
-
 public class HomeBrandTitleActivity extends BaseActivity<BrandTitlePersenter> implements IBrandTitle.View {
     private int page=1;
     @BindView(R.id.home_brand_title_rcy)
     RecyclerView homeBrandTitleRcy;
-
     @Override
     protected int getLayout() {
         return R.layout.activity_home_brand_title;
     }
-
     @Override
     protected BrandTitlePersenter createPrenter() {
         return new BrandTitlePersenter(this);

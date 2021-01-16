@@ -8,10 +8,10 @@
         android:id="@+id/img_topic"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_150"
-
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
+
     <TextView
         android:id="@+id/txt_topic_name"
         android:layout_width="wrap_content"
@@ -19,7 +19,8 @@
         app:layout_constraintTop_toBottomOf="@id/img_topic"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="@dimen/dp_20"
-        android:textSize="@dimen/sp_16"/>
+        android:textSize="@dimen/sp_16" />
+
     <TextView
         android:id="@+id/txt_topic_des"
         android:layout_width="wrap_content"
@@ -28,6 +29,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="@dimen/dp_5"
         android:maxLines="1"
-        android:textSize="@dimen/sp_12"/>
 
+        android:textSize="@dimen/sp_12" />
 </androidx.constraintlayout.widget.ConstraintLayout>

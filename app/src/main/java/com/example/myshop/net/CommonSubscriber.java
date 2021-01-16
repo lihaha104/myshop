@@ -2,7 +2,6 @@ package com.example.myshop.net;
 
 import android.text.TextUtils;
 
-
 import com.example.myshop.interfaces.Callback;
 
 import io.reactivex.subscribers.ResourceSubscriber;

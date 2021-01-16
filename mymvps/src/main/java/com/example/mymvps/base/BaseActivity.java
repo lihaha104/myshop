@@ -13,11 +13,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public abstract class BaseActivity<P extends IBasePresenter> extends AppCompatActivity implements IBaseView {
-
-
     protected P persenter;
     Unbinder unbinder;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +42,10 @@ public abstract class BaseActivity<P extends IBasePresenter> extends AppCompatAc
 
     }
 
+    @Override
+    public void showTips(String tips) {
+
+    }
 
 
     @Override

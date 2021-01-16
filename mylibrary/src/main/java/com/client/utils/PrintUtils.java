@@ -1,4 +1,4 @@
-package com.example.mymvps.utils;
+package com.client.utils;
 
 import android.util.Log;
 import android.view.MotionEvent;

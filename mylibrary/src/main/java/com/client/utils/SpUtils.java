@@ -1,16 +1,17 @@
-package com.example.mymvps.utils;
+package com.client.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.mymvps.app.MyApp;
+
+import com.client.app.MyApplication;
 
 
 public class SpUtils {
     private static SpUtils instance;
     private SharedPreferences sp;
     public SpUtils(){
-        sp = MyApp.application.getSharedPreferences("chat", Context.MODE_PRIVATE);
+        sp = MyApplication.myapp.getSharedPreferences("chat", Context.MODE_PRIVATE);
     }
 
     public static SpUtils getInstance(){

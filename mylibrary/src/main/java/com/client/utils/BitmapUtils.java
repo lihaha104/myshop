@@ -1,4 +1,4 @@
-package com.example.mymvps.utils;
+package com.client.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

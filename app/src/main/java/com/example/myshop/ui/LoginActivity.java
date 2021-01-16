@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.example.myshop.R;
 import com.example.myshop.base.BaseActivity;
 import com.example.myshop.interfaces.login.ILogin;
@@ -86,7 +88,18 @@ public class LoginActivity extends BaseActivity<LoginPersenter> implements ILogi
     }
 
     private void regist() {
-        startActivity(new Intent(this,RegistActivity.class));
+        startActivityForResult(new Intent(this,RegistActivity.class),300);
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 300 && resultCode == 200){
+            String name = data.getStringExtra("name");
+            String pwds = data.getStringExtra("pwd");
+            user.setText(name);
+            pwd.setText(pwds);
+        }
     }
 
     private void login() {
@@ -105,6 +118,16 @@ public class LoginActivity extends BaseActivity<LoginPersenter> implements ILogi
         if(!TextUtils.isEmpty(loginBean.getData().getToken())){
             SpUtils.getInstance().setValue("token",loginBean.getData().getToken());
             SpUtils.getInstance().setValue("uid",loginBean.getData().getUserInfo().getUid());
+            String username = loginBean.getData().getUserInfo().getUsername();
+            SpUtils.getInstance().setValue("username", loginBean.getData().getUserInfo().getUsername());
+            SpUtils.getInstance().setValue("avatar", loginBean.getData().getUserInfo().getAvatar());
+            SpUtils.getInstance().setValue("nickname", loginBean.getData().getUserInfo().getNickname());
+            SpUtils.getInstance().setValue("birthday", loginBean.getData().getUserInfo().getBirthday());
+
+            Intent intent = new Intent();
+            intent.putExtra("username", username);
+            intent.putExtra("avatar", loginBean.getData().getUserInfo().getAvatar());
+            setResult(300, intent);
             finish();
         }
     }

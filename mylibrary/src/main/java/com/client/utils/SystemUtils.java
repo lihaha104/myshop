@@ -1,4 +1,4 @@
-package com.example.mymvps.utils;
+package com.client.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,12 +13,12 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
+import com.youth.banner.BuildConfig;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 
-import io.realm.BuildConfig;
 
 public class SystemUtils {
 

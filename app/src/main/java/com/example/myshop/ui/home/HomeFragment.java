@@ -17,8 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.mymvps.base.BaseAdapter;
 import com.example.myshop.R;
-import com.example.myshop.base.BaseAdapter;
+
 import com.example.myshop.base.BaseFragment;
 import com.example.myshop.interfaces.home.IHome;
 import com.example.myshop.model.home.HomeModelBean;
@@ -26,7 +27,7 @@ import com.example.myshop.persenter.home.HomePersenter;
 import com.example.myshop.ui.MainActivity;
 import com.example.myshop.ui.topic.TopicActivity;
 import com.example.myshop.utils.TxtUtils;
-import com.live.RoomActivity;
+import com.client.ui.RoomActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
@@ -35,7 +36,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HomeFragment extends BaseFragment<HomePersenter> implements IHome.View {
+public class  HomeFragment extends BaseFragment<HomePersenter> implements IHome.View {
 
     @BindView(R.id.home_banner)
     Banner homeBanner;
